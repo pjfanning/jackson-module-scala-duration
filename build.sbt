@@ -38,7 +38,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.scala-lang.modules" %% "scala-java8-compat" % "1.0.2",
       "com.fasterxml.jackson.core" % "jackson-databind" % jacksonDatabindVersion,
-      "com.fasterxml.jackson.module" % "jackson-modules-java8" % jacksonVersion,
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion % Test,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
       "org.scalatest" %% "scalatest" % "3.2.11" % Test
     ),
