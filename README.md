@@ -25,6 +25,7 @@ val jacksonVersion = "2.13.2"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
+  "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "com.github.pjfanning" %% "jackson-module-scala-duration" % jacksonVersion
 )
 ```
