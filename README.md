@@ -7,11 +7,14 @@ JavaTimeModule then does the rest.
 
 If you need to support Scala classes generally, you will also need to add [jackson-module-scala](https://github.com/FasterXML/jackson-module-scala).
 
-If you don't use this module, Scala FiniteDurations can still be serialized/deserialized but they will appear in a format like:
+If you don't use this module, Scala FiniteDurations can still be serialized but they will appear in a format like:
 
 ```
 {"length":7,"unit":"DAYS","finite":true}
 ```
+
+The format seems to differ depending on Scala version (because the internals of the FiniteDuration class can change
+from release to release). Deserialization seems to be problematic regardless of Scala version.
 
 When this module is used, the serialization format defaults to writing durations as numbers.
 The format can be changed by enabling/disabling these jackson-datatype-jsr310 features:

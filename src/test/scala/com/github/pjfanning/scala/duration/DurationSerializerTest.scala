@@ -67,14 +67,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       }
       idex.getMessage should startWith("Java 8 date/time type `java.time.Duration` not supported by default")
     }
-    "serialize week (without duration module)" in {
-      val mapper = JsonMapper.builder()
-        .addModule(DefaultScalaModule)
-        .addModule(new JavaTimeModule)
-        .build()
-      //TODO scala 3 format is different (no finite field)
-      //mapper.writeValueAsString(week) shouldEqual """{"duration":{"length":7,"unit":"DAYS","finite":true}}"""
-    }
   }
 
 }
