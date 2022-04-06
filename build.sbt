@@ -1,10 +1,8 @@
-import sbt.url
+import sbt._
+import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
 ThisBuild / version := "2.13.2-SNAPSHOT"
-
-ThisBuild / scalaVersion := "2.13.8"
-ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.15", "2.13.8", "3.0.2")
 
 val jacksonVersion = "2.13.2"
 val jacksonDatabindVersion = "2.13.2.2"
@@ -13,6 +11,10 @@ lazy val root = (project in file("."))
   .settings(
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
+
+    ThisBuild / scalaVersion := "2.13.8",
+    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.15", "2.13.8", "3.0.2"),
+
     sbtPlugin := false,
 
     scalacOptions ++= Seq("-deprecation", "-Xcheckinit", "-encoding", "utf8", "-g:vars", "-unchecked", "-optimize"),
