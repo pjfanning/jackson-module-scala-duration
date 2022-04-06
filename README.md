@@ -20,10 +20,12 @@ libraryDependencies ++= Seq(
 
 ```scala
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.github.pjfanning.scala.duration.DurationModule
 
 val mapper = JsonMapper.builder()
-    .addModule(new JavaTimeModule())
+    .addModule(new JavaTimeModule)
+    .addModule(DefaultScalaModule)
     .addModule(DurationModule)
     .build()
 ```
