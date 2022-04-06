@@ -1,9 +1,14 @@
 # jackson-module-scala-duration
 
+![Build Status](https://github.com/pjfanning/jackson-module-scala-duration/actions/workflows/ci.yml/badge.svg)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13)
+
 This module needs to be used along with [jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/tree/2.14/datetime)
 JavaTimeModule. What this module does is to convert Scala [FiniteDurations](https://www.scala-lang.org/api/2.13.8/scala/concurrent/duration/FiniteDuration.html)
 into Java Time [Durations](https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html) and vice versa.
 JavaTimeModule then does the rest.
+
+This module supports Scala 2.11, 2.12, 2.13 and 3.
 
 If you need to support Scala classes generally, you will also need to add [jackson-module-scala](https://github.com/FasterXML/jackson-module-scala).
 
