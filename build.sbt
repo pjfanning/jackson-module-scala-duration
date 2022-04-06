@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
 
-    ThisBuild / scalaVersion := "3.0.2",
+    ThisBuild / scalaVersion := "2.13.8",
     ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.15", "2.13.8", "3.0.2"),
 
     sbtPlugin := false,
@@ -22,6 +22,7 @@ lazy val root = (project in file("."))
     homepage := Some(new java.net.URL("https://github.com/pjfanning/jackson-module-scala-duration/")),
     description := "A library for serializing/deserializing scala durations using Jackson.",
 
+    publishMavenStyle := true,
     publishTo := sonatypePublishToBundle.value,
 
     licenses := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
