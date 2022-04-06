@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
 
-    ThisBuild / scalaVersion := "2.13.8",
+    ThisBuild / scalaVersion := "3.0.2",
     ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.15", "2.13.8", "3.0.2"),
 
     sbtPlugin := false,
