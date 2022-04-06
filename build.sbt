@@ -4,7 +4,7 @@ import sbtghactions.JavaSpec.Distribution.Zulu
 ThisBuild / version := "2.13.2-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.13.8"
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8", "3.0.2")
+ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.15", "2.13.8", "3.0.2")
 
 val jacksonVersion = "2.13.2"
 val jacksonDatabindVersion = "2.13.2.2"
