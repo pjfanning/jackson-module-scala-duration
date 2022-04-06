@@ -13,7 +13,7 @@ If you don't use this module, Scala FiniteDurations can still be serialized/dese
 {"length":7,"unit":"DAYS","finite":true}
 ```
 
-The serialization format defaults to writing durations as numbers.
+When this module is used, the serialization format defaults to writing durations as numbers.
 The format can be changed by enabling/disabling these jackson-datatype-jsr310 features:
 * SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
   * if you disable this, the format used is [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format (eg 'PT12H' for 12 hours) 
