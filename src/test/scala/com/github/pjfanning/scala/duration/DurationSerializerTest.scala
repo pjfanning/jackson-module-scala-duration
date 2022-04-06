@@ -12,6 +12,7 @@ import scala.concurrent.duration.DurationLong
 
 class DurationSerializerTest extends AnyWordSpec with Matchers {
   private val week = DurationWrapper(7.days)
+  private val second = DurationWrapper(1.second)
   "DurationModule" should {
     "serialize week (default)" in {
       val mapper = JsonMapper.builder()
@@ -20,6 +21,14 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
         .addModule(new JavaTimeModule)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":604800.000000000}"""
+    }
+    "serialize second (default)" in {
+      val mapper = JsonMapper.builder()
+        .addModule(DefaultScalaModule)
+        .addModule(DurationModule)
+        .addModule(new JavaTimeModule)
+        .build()
+      mapper.writeValueAsString(second) shouldEqual """{"duration":1.000000000}"""
     }
     "serialize week (nanos no effect)" in {
       val mapper = JsonMapper.builder()
@@ -38,6 +47,15 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
         .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":"PT168H"}"""
+    }
+    "serialize second (as period)" in {
+      val mapper = JsonMapper.builder()
+        .addModule(DefaultScalaModule)
+        .addModule(DurationModule)
+        .addModule(new JavaTimeModule)
+        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .build()
+      mapper.writeValueAsString(second) shouldEqual """{"duration":"PT1S"}"""
     }
     "serialize week (without java time module)" in {
       val mapper = JsonMapper.builder()
