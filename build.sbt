@@ -2,8 +2,6 @@ import sbt._
 import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
-ThisBuild / version := "2.13.2-SNAPSHOT"
-
 val jacksonVersion = "2.13.2"
 val jacksonDatabindVersion = "2.13.2.2"
 
