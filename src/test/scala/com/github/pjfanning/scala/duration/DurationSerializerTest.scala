@@ -57,6 +57,16 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
         .build()
       mapper.writeValueAsString(second) shouldEqual """{"duration":"PT1S"}"""
     }
+    "serialize duration as map key" in {
+      val mapper = JsonMapper.builder()
+        .addModule(DefaultScalaModule)
+        .addModule(DurationModule)
+        .addModule(new JavaTimeModule)
+        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .build()
+      val map = Map(second.duration -> "mapped")
+      mapper.writeValueAsString(map) shouldEqual """{"PT1S":"mapped"}"""
+    }
     "serialize week (without java time module)" in {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
