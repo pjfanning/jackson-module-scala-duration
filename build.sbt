@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import sbtghactions.JavaSpec.Distribution.Zulu
+import org.typelevel.sbt.gha.JavaSpec.Distribution.Zulu
 
 val jacksonVersion = "2.13.3"
 
@@ -55,7 +55,6 @@ lazy val root = (project in file("."))
     }.taskValue,
 
     ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Zulu, "8")),
-    ThisBuild / githubWorkflowTargetTags ++= Seq("v*"),
     ThisBuild / githubWorkflowPublishTargetBranches := Seq(
       RefPredicate.Equals(Ref.Branch("main")),
       RefPredicate.StartsWith(Ref.Tag("v"))
