@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 import org.typelevel.sbt.gha.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.14.0"
+val jacksonVersion = "2.14.2"
 
 lazy val root = (project in file("."))
   .settings(
@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     organization := "com.github.pjfanning",
 
     ThisBuild / scalaVersion := "2.13.10",
-    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.17", "2.13.10", "3.2.0"),
+    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.17", "2.13.10", "3.2.2"),
 
     sbtPlugin := false,
 
