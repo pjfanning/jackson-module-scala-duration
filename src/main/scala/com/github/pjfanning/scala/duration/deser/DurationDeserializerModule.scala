@@ -49,6 +49,7 @@ private object FiniteDurationKeyDeserializerResolver extends KeyDeserializers {
 }
 
 trait DurationDeserializerModule extends JacksonModule {
+  override def getModuleName: String = "DurationDeserializerModule"
   this += { _ addDeserializers FiniteDurationDeserializerResolver }
   this += { _ addKeyDeserializers FiniteDurationKeyDeserializerResolver }
 }

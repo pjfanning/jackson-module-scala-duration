@@ -44,6 +44,7 @@ private object FiniteDurationKeySerializerResolver extends Serializers.Base {
 }
 
 trait DurationSerializerModule extends JacksonModule {
+  override def getModuleName: String = "DurationSerializerModule"
   this += { _ addSerializers FiniteDurationSerializerResolver }
   this += { _ addKeySerializers FiniteDurationKeySerializerResolver }
 }
