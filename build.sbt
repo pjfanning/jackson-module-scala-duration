@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 import org.typelevel.sbt.gha.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.14.2"
+val jacksonVersion = "2.15.0"
 
 lazy val root = (project in file("."))
   .settings(
@@ -40,7 +40,7 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
       "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion % Test,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
-      "org.scalatest" %% "scalatest" % "3.2.14" % Test
+      "org.scalatest" %% "scalatest" % "3.2.15" % Test
     ),
 
     // enable publishing the main API jar
