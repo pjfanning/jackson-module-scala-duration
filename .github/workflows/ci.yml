@@ -7,8 +7,6 @@
 
 name: Continuous Integration
 
-permissions: {}
-
 on:
   pull_request:
     branches: ['**']
@@ -53,8 +51,8 @@ jobs:
         if: matrix.java == 'zulu@8' && steps.setup-java-zulu-8.outputs.cache-hit == 'false'
         run: sbt '++ ${{ matrix.scala }}' reload +update
 
-      #- name: Check that workflows are up to date
-      #  run: sbt githubWorkflowCheck
+      - name: Check that workflows are up to date
+        run: sbt githubWorkflowCheck
 
       - name: Build project
         run: sbt '++ ${{ matrix.scala }}' test
