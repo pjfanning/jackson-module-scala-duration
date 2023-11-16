@@ -3,8 +3,8 @@
 ![Build Status](https://github.com/pjfanning/jackson-module-scala-duration/actions/workflows/ci.yml/badge.svg)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13)
 
-This module needs to be used along with [jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/tree/2.14/datetime)
-JavaTimeModule. What this module does is to convert Scala [FiniteDurations](https://www.scala-lang.org/api/2.13.8/scala/concurrent/duration/FiniteDuration.html)
+This module needs to be used along with [jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/tree/2.16/datetime)
+JavaTimeModule. What this module does is to convert Scala [FiniteDurations](https://www.scala-lang.org/api/2.13.12/scala/concurrent/duration/FiniteDuration.html)
 into Java Time [Durations](https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html) and vice versa.
 JavaTimeModule then does the rest.
 
@@ -29,7 +29,7 @@ The format can be changed by enabling/disabling these jackson-datatype-jsr310 fe
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 
 ```scala
-val jacksonVersion = "2.13.3"
+val jacksonVersion = "2.16.0"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
