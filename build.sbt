@@ -1,16 +1,16 @@
 import sbt._
 import Keys._
-import org.typelevel.sbt.gha.JavaSpec.Distribution.Zulu
+import sbtghactions.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.15.1"
+val jacksonVersion = "2.16.0"
 
 lazy val root = (project in file("."))
   .settings(
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
 
-    ThisBuild / scalaVersion := "2.13.10",
-    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.17", "2.13.10", "3.2.2"),
+    ThisBuild / scalaVersion := "2.13.12",
+    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.18", "2.13.12", "3.3.1"),
 
     sbtPlugin := false,
 
@@ -40,7 +40,7 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
       "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion % Test,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
-      "org.scalatest" %% "scalatest" % "3.2.15" % Test
+      "org.scalatest" %% "scalatest" % "3.2.17" % Test
     ),
 
     // enable publishing the main API jar
@@ -55,6 +55,7 @@ lazy val root = (project in file("."))
     }.taskValue,
 
     ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Zulu, "8")),
+    ThisBuild / githubWorkflowTargetTags ++= Seq("v*"),
     ThisBuild / githubWorkflowPublishTargetBranches := Seq(
       RefPredicate.Equals(Ref.Branch("main")),
       RefPredicate.StartsWith(Ref.Tag("v"))
@@ -73,3 +74,4 @@ lazy val root = (project in file("."))
       )
     )
   )
+
