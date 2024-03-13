@@ -2,15 +2,15 @@ import sbt._
 import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.16.0"
+val jacksonVersion = "2.17.0"
 
 lazy val root = (project in file("."))
   .settings(
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
 
-    ThisBuild / scalaVersion := "2.13.12",
-    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.18", "2.13.12", "3.3.1"),
+    ThisBuild / scalaVersion := "2.13.13",
+    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.19", "2.13.13", "3.3.3"),
 
     sbtPlugin := false,
 
