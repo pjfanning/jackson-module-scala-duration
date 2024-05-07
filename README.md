@@ -29,7 +29,7 @@ The format can be changed by enabling/disabling these jackson-datatype-jsr310 fe
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 
 ```scala
-val jacksonVersion = "2.16.0"
+val jacksonVersion = "2.17.1"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
