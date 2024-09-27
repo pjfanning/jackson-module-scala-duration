@@ -2,15 +2,15 @@ import sbt._
 import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.17.1"
+val jacksonVersion = "2.18.0"
 
 lazy val root = (project in file("."))
   .settings(
     name := "jackson-module-scala-duration",
     organization := "com.github.pjfanning",
 
-    ThisBuild / scalaVersion := "2.13.13",
-    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.19", "2.13.13", "3.3.3"),
+    ThisBuild / scalaVersion := "2.13.15",
+    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.20", "2.13.15", "3.3.4"),
 
     sbtPlugin := false,
 
@@ -40,7 +40,7 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
       "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion % Test,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
-      "org.scalatest" %% "scalatest" % "3.2.17" % Test
+      "org.scalatest" %% "scalatest" % "3.2.19" % Test
     ),
 
     // enable publishing the main API jar
