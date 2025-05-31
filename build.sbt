@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.18.0"
+val jacksonVersion = "2.19.0"
 
 lazy val root = (project in file("."))
   .settings(
