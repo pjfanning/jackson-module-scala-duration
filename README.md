@@ -29,7 +29,7 @@ The format can be changed by enabling/disabling these jackson-datatype-jsr310 fe
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 
 ```scala
-val jacksonVersion = "2.17.1"
+val jacksonVersion = "2.18.4"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
@@ -39,6 +39,7 @@ libraryDependencies ++= Seq(
 ```
 
 ```scala
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.github.pjfanning.scala.duration.DurationModule
@@ -47,6 +48,7 @@ val mapper = JsonMapper.builder()
     .addModule(new JavaTimeModule)
     .addModule(DefaultScalaModule)
     .addModule(DurationModule)
+    .diasble(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
     .build()
 ```
 
