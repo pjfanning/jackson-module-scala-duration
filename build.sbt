@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     organization := "com.github.pjfanning",
 
     ThisBuild / scalaVersion := "2.13.17",
-    ThisBuild / crossScalaVersions := Seq("2.11.12", "2.12.20", "2.13.17", "3.3.6"),
+    ThisBuild / crossScalaVersions := Seq("2.12.20", "2.13.17", "3.3.6"),
 
     sbtPlugin := false,
 
