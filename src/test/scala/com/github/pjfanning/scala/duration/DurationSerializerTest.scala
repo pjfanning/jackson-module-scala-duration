@@ -1,11 +1,11 @@
 package com.github.pjfanning.scala.duration
 
-import tools.jackson.databind.SerializationFeature
 import tools.jackson.databind.exc.InvalidDefinitionException
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.scala.DefaultScalaModule
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import tools.jackson.databind.cfg.DateTimeFeature
 
 import scala.concurrent.duration.DurationLong
 
@@ -31,7 +31,7 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .enable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
+        .enable(DateTimeFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":604800.000000000}"""
     }
@@ -39,7 +39,7 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .disable(DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":"PT168H"}"""
     }
@@ -47,7 +47,7 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .disable(DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       mapper.writeValueAsString(second) shouldEqual """{"duration":"PT1S"}"""
     }
@@ -55,20 +55,10 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .disable(DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       val map = Map(second.duration -> "mapped")
       mapper.writeValueAsString(map) shouldEqual """{"PT1S":"mapped"}"""
-    }
-    "serialize week (without java time module)" in {
-      val mapper = JsonMapper.builder()
-        .addModule(DefaultScalaModule)
-        .addModule(DurationModule)
-        .build()
-      val idex = intercept[InvalidDefinitionException] {
-        mapper.writeValueAsString(week)
-      }
-      idex.getMessage should startWith("Java 8 date/time type `java.time.Duration` not supported by default")
     }
   }
 

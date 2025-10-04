@@ -1,11 +1,11 @@
 package com.github.pjfanning.scala.duration
 
 import tools.jackson.core.`type`.TypeReference
-import tools.jackson.databind.{DeserializationFeature, SerializationFeature}
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.scala.DefaultScalaModule
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import tools.jackson.databind.cfg.DateTimeFeature
 
 import scala.concurrent.duration.{DurationLong, FiniteDuration}
 
@@ -26,7 +26,7 @@ class DurationDeserializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .enable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)
+        .enable(DateTimeFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)
         .build()
       val str = """{"duration":604800.0000}"""
       mapper.readValue(str, classOf[DurationWrapper]) shouldEqual week
@@ -45,7 +45,7 @@ class DurationDeserializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
+        .disable(DateTimeFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       val json = """{"PT1S":"mapped"}"""
       val map = mapper.readValue(json, new TypeReference[Map[FiniteDuration, String]] {})
