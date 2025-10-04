@@ -1,10 +1,9 @@
 package com.github.pjfanning.scala.duration
 
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException
-import com.fasterxml.jackson.databind.json.JsonMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import tools.jackson.databind.SerializationFeature
+import tools.jackson.databind.exc.InvalidDefinitionException
+import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.scala.DefaultScalaModule
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -18,7 +17,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":604800.000000000}"""
     }
@@ -26,7 +24,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .build()
       mapper.writeValueAsString(second) shouldEqual """{"duration":1.000000000}"""
     }
@@ -34,7 +31,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .enable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":604800.000000000}"""
@@ -43,7 +39,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       mapper.writeValueAsString(week) shouldEqual """{"duration":"PT168H"}"""
@@ -52,7 +47,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       mapper.writeValueAsString(second) shouldEqual """{"duration":"PT1S"}"""
@@ -61,7 +55,6 @@ class DurationSerializerTest extends AnyWordSpec with Matchers {
       val mapper = JsonMapper.builder()
         .addModule(DefaultScalaModule)
         .addModule(DurationModule)
-        .addModule(new JavaTimeModule)
         .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
         .build()
       val map = Map(second.duration -> "mapped")

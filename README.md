@@ -8,7 +8,12 @@ JavaTimeModule. What this module does is to convert Scala [FiniteDurations](http
 into Java Time [Durations](https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html) and vice versa.
 JavaTimeModule then does the rest.
 
-This module supports Scala 2.11, 2.12, 2.13 and 3.
+* jackson-module-scala-duration 3.x supports Jackson 3
+    * 3.x supports Scala 2.12, 2.13 and 3.
+    * jackson-datatype-jsr310 is bundled with jackson-databind 3 so you don't need to add a separate dependency
+* jackson-module-scala-duration 2.x supports Jackson 2
+    * 2.x supports Scala 2.11, 2.12, 2.13 and 3.
+    * you need to also add a dependency on com:fasterxml.jackson.datatype:jackson-datatype-jsr310
 
 If you need to support Scala classes generally, you will also need to add [jackson-module-scala](https://github.com/FasterXML/jackson-module-scala).
 
@@ -28,8 +33,9 @@ The format can be changed by enabling/disabling these jackson-datatype-jsr310 fe
 * SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 
+Jackson 2 example:
 ```scala
-val jacksonVersion = "2.18.4"
+val jacksonVersion = "2.20.0"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
@@ -38,14 +44,25 @@ libraryDependencies ++= Seq(
 )
 ```
 
+Jackson 3 example:
 ```scala
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
+val jacksonVersion = "3.0.0"
+
+libraryDependencies ++= Seq(
+  "tools.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
+  "tools.jackson.module" %% "jackson-module-scala" % jacksonVersion,
+  "com.github.pjfanning" %% "jackson-module-scala-duration" % jacksonVersion
+)
+```
+
+```scala
+// Jackson 2 users should use `com.fasterxml.jackson` instead of `tools.jackson` in imports below
+import tools.jackson.databind.SerializationFeature
+import tools.jackson.module.scala.DefaultScalaModule
 import com.github.pjfanning.scala.duration.DurationModule
 
 val mapper = JsonMapper.builder()
-    .addModule(new JavaTimeModule)
+    //.addModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule) -- Jackson 2 only
     .addModule(DefaultScalaModule)
     .addModule(DurationModule)
     .diasble(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)

@@ -1,10 +1,10 @@
 package com.github.pjfanning.scala.duration.deser
 
-import com.fasterxml.jackson.core.JsonParser
-import com.fasterxml.jackson.databind.deser.{Deserializers, KeyDeserializers}
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer
-import com.fasterxml.jackson.databind._
-import com.fasterxml.jackson.databind.`type`.SimpleType
+import tools.jackson.core.JsonParser
+import tools.jackson.databind.deser.{Deserializers, KeyDeserializers}
+import tools.jackson.databind.deser.std.StdDeserializer
+import tools.jackson.databind._
+import tools.jackson.databind.`type`.SimpleType
 import com.github.pjfanning.scala.duration.JacksonModule
 
 import java.time.{Duration => JavaDuration}
@@ -13,9 +13,9 @@ import scala.concurrent.duration.FiniteDuration
 import scala.languageFeature.postfixOps
 
 private object FiniteDurationDeserializerShared {
-  val JavaDurationClass = classOf[JavaDuration]
-  lazy val JavaDurationType = SimpleType.constructUnsafe(JavaDurationClass)
-  val FiniteDurationClass = classOf[FiniteDuration]
+  private[deser] val JavaDurationClass = classOf[JavaDuration]
+  private[deser] lazy val JavaDurationType = SimpleType.constructUnsafe(JavaDurationClass)
+  private[deser] val FiniteDurationClass = classOf[FiniteDuration]
 }
 
 private object FiniteDurationDeserializer extends StdDeserializer[FiniteDuration](classOf[FiniteDuration]) {
@@ -35,14 +35,17 @@ private object FiniteDurationKeyDeserializer extends KeyDeserializer {
 }
 
 private object FiniteDurationDeserializerResolver extends Deserializers.Base {
-  override def findBeanDeserializer(javaType: JavaType, config: DeserializationConfig, beanDesc: BeanDescription): JsonDeserializer[FiniteDuration] =
+  override def findBeanDeserializer(javaType: JavaType, config: DeserializationConfig, beanDescRef: BeanDescription.Supplier): ValueDeserializer[FiniteDuration] =
     if (FiniteDurationDeserializerShared.FiniteDurationClass isAssignableFrom javaType.getRawClass)
       FiniteDurationDeserializer
     else None.orNull
+
+  override def hasDeserializerFor(config: DeserializationConfig, valueType: Class[_]): Boolean =
+    FiniteDurationDeserializerShared.FiniteDurationClass isAssignableFrom valueType
 }
 
 private object FiniteDurationKeyDeserializerResolver extends KeyDeserializers {
-  override def findKeyDeserializer(javaType: JavaType, config: DeserializationConfig, beanDesc: BeanDescription): KeyDeserializer =
+  override def findKeyDeserializer(javaType: JavaType, config: DeserializationConfig, beanDescRef: BeanDescription.Supplier): KeyDeserializer =
     if (FiniteDurationDeserializerShared.FiniteDurationClass isAssignableFrom javaType.getRawClass)
       FiniteDurationKeyDeserializer
     else None.orNull

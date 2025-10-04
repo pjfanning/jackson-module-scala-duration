@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 import sbtghactions.JavaSpec.Distribution.Zulu
 
-val jacksonVersion = "2.20.0"
+val jacksonVersion = "3.0.0"
 
 lazy val root = (project in file("."))
   .settings(
@@ -36,9 +36,8 @@ lazy val root = (project in file("."))
 
     libraryDependencies ++= Seq(
       "org.scala-lang.modules" %% "scala-java8-compat" % "1.0.2",
-      "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion,
-      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion % Test,
-      "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
+      "tools.jackson.core" % "jackson-databind" % jacksonVersion,
+      "tools.jackson.module" %% "jackson-module-scala" % jacksonVersion % Test,
       "org.scalatest" %% "scalatest" % "3.2.19" % Test
     ),
 
