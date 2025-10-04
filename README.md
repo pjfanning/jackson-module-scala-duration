@@ -65,7 +65,7 @@ val mapper = JsonMapper.builder()
     //.addModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule) -- Jackson 2 only
     .addModule(DefaultScalaModule)
     .addModule(DurationModule)
-    .diasble(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+    .disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)
     .build()
 ```
 
