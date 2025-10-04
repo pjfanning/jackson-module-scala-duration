@@ -28,7 +28,7 @@ from release to release). Deserialization seems to be problematic regardless of 
 
 When this module is used, the serialization format defaults to writing durations as numbers.
 The format can be changed by enabling/disabling these jackson-datatype-jsr310 features:
-* SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
+* SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS
   * if you disable this, the format used is [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format (eg 'PT12H' for 12 hours) 
 * SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
