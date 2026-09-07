@@ -1,19 +1,19 @@
 # jackson-module-scala-duration
 
 ![Build Status](https://github.com/pjfanning/jackson-module-scala-duration/actions/workflows/ci.yml/badge.svg)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pjfanning/jackson-module-scala-duration_2.13)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.github.pjfanning/jackson-module-scala-duration_2.13)
 
-This module needs to be used along with [jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/tree/2.16/datetime)
-JavaTimeModule. What this module does is to convert Scala [FiniteDurations](https://www.scala-lang.org/api/2.13.12/scala/concurrent/duration/FiniteDuration.html)
+What this module does is to convert Scala [FiniteDurations](https://www.scala-lang.org/api/2.13.12/scala/concurrent/duration/FiniteDuration.html)
 into Java Time [Durations](https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html) and vice versa.
 JavaTimeModule then does the rest.
 
 * jackson-module-scala-duration 3.x supports Jackson 3
+    * jackson-module-scala 3.3.0+ has this code added to it so this jar is not needed 
     * 3.x supports Scala 2.12, 2.13 and 3.
     * jackson-datatype-jsr310 is bundled with jackson-databind 3 so you don't need to add a separate dependency
 * jackson-module-scala-duration 2.x supports Jackson 2
     * 2.x supports Scala 2.11, 2.12, 2.13 and 3.
-    * you need to also add a dependency on com:fasterxml.jackson.datatype:jackson-datatype-jsr310
+    * you need to also add a dependency on [com:fasterxml.jackson.datatype:jackson-datatype-jsr310](https://github.com/FasterXML/jackson-modules-java8/tree/2.16/datetime)
 
 If you need to support Scala classes generally, you will also need to add [jackson-module-scala](https://github.com/FasterXML/jackson-module-scala).
 
@@ -33,25 +33,27 @@ The format can be changed by enabling/disabling these jackson-datatype-jsr310 fe
 * SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 * DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS appears to have no effect on durations
 
-Jackson 2 example:
+Jackson 2 dependencies:
 ```scala
-val jacksonVersion = "2.20.0"
+val jacksonVersion = "2.21.6"
+val durationModuleVersion = "2.20.0"
 
 libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
-  "com.github.pjfanning" %% "jackson-module-scala-duration" % jacksonVersion
+  "com.github.pjfanning" %% "jackson-module-scala-duration" % durationModuleVersion
 )
 ```
 
-Jackson 3 example:
+Jackson 3 dependencies:
 ```scala
-val jacksonVersion = "3.0.0"
+val jacksonVersion = "3.1.6"
+val durationModuleVersion = "3.0.0"
 
 libraryDependencies ++= Seq(
   "tools.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion,
   "tools.jackson.module" %% "jackson-module-scala" % jacksonVersion,
-  "com.github.pjfanning" %% "jackson-module-scala-duration" % jacksonVersion
+  "com.github.pjfanning" %% "jackson-module-scala-duration" % durationModuleVersion
 )
 ```
 
